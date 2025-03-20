@@ -7,7 +7,7 @@ import { BiBookmark } from "react-icons/bi";
 import { IoArrowBack, IoArrowForward } from "react-icons/io5";
 import useWindowWidth from "../hooks/useWindowWidth";
 import { useQuery } from "@tanstack/react-query";
-import axiosInstance from "../axios/axiosInstance";
+import axiosInstance from "../api/axiosInstance";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 type Props = {};
@@ -40,19 +40,13 @@ useEffect(()=>{
  
   setMark(mark)
 },[setMark])
-  // const questions = [
-  //   {
-  //     _id: 1,
-  //     text: 'Which of the following words is a synonym for "exhilarating"?',
-  //     options: ["Exciting", "Boring", "Tiresome", "Frightening", "Confusing"],
-  //   },
-  // ];
+  
 
   useEffect(() => {
     if (isLargeScreen) {
-      setSidebarVisible(true); // Always show sidebar on large screens
+      setSidebarVisible(true); 
     } else {
-      setSidebarVisible(false); // Hide sidebar on smaller screens
+      setSidebarVisible(false); 
     }
   }, [isLargeScreen]);
 const {data=[],isLoading,isError}=useQuery({
@@ -64,15 +58,15 @@ const {data=[],isLoading,isError}=useQuery({
   }
 
 })
-console.log(page)
 const {questions=[],totalQuestions}=data;
-const handleNext=(e:Event)=>{
+const handleSubmit=(e:Event)=>{
   e.preventDefault();
-  if(page===9){
     navigate(`/success`)
   }
- else if(page!==9){
-    if(selectedAnswer===questions[page].answer){
+
+  const handleNext=(e:Event)=>{
+ 
+    if(selectedAnswer===questions[page].correctAnswer){
       setMark((prev:any)=>Number(prev)+5);
       // console.log(mark)
       localStorage.setItem('mark',`${Number(mark+5)}`)
@@ -81,7 +75,6 @@ const handleNext=(e:Event)=>{
     newSearchParams.set("page", String(page +1 ));
     setSearchParams(newSearchParams);
   }
-}
 
 const handlePrev=(e:Event)=>{
   e.preventDefault();
@@ -125,12 +118,17 @@ if(isError)
             <div className="grid grid-cols-4 sm:grid-cols-3 md:grid-cols-4 gap-2">
               {[1, 2, 3, 4, 5, 6, 7, 8,9,10].map((num) => (
                 <button
-                  key={num}
-                  className={`aspect-auto py-2 rounded border 
-                  flex items-center justify-center text-lg ${num===page+1?'bg-lime-100':null}`}
-                >
-                  {num}
-                </button>
+                key={num}
+                className={`aspect-auto py-2 rounded border 
+                flex items-center justify-center text-lg ${num === page + 1 ? 'bg-lime-100' : ''}`}
+                onClick={() => {
+                  const newSearchParams = new URLSearchParams(searchParams);
+                  newSearchParams.set("page", String(num - 1));
+                  setSearchParams(newSearchParams);
+                }}
+              >
+                {num}
+              </button>
               ))}
             </div>
             
@@ -180,7 +178,7 @@ if(isError)
               <div
                 className="h-full bg-[#2A586F]"
                 style={{
-                  width: `${(page+1 / totalQuestions) * 100}%`,
+                  width: `${((page + 1) / totalQuestions) * 100}%`,
                 }}
               ></div>
             </div>
@@ -198,7 +196,7 @@ if(isError)
               <div className="bg-[#2A586F] text-white rounded-full w-8 h-8 flex items-center justify-center mr-3">
                 {page+1}
               </div>
-              <h2 className="text-lg font-medium">{questions[page].question}</h2>
+              <h2 className="text-lg font-medium">{questions[page].questions}</h2>
             </div>
 
             <div className="space-y-3 bg-white p-3">
@@ -235,9 +233,12 @@ if(isError)
               <button onClick={(e:any)=>handlePrev(e)} className="flex items-center gap-1 px-5 py-1 rounded  text-white bg-[#2A586F]">
                 <IoArrowBack className="mr-1" /> Previous
               </button>
+              {page===9? <button onClick={(e:any)=>handleSubmit(e)} className="flex items-center gap-1 px-3 py-1 rounded  text-white bg-[#33ac3d]">
+                submit <IoArrowForward className="ml-1" />
+              </button>:
               <button onClick={(e:any)=>handleNext(e)} className="flex items-center gap-1 px-3 py-1 rounded  text-white bg-[#2A586F]">
                 Next <IoArrowForward className="ml-1" />
-              </button>
+              </button>}
             </div>
           </div>
         </div>

@@ -13,3 +13,11 @@ body{
 }
 
   
+:root {
+  --primary: #2A586F;
+  --secondary: #FAC166;
+  --text: #636363;
+  --background: #ffffff;
+  --border: #c4c4c4;
+  --red:#e41616;
+}

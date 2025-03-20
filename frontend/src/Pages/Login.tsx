@@ -5,16 +5,15 @@ import * as Yup from "yup";
 import Select, { SingleValue } from "react-select";
 import { useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
-import axiosInstance from "../axios/axiosInstance";
+import axiosInstance from "../api/axiosInstance";
 import { IUser } from "./Register";
 
-// Country option type
-type CountryOption = {
+type Country = {
   value: string;
   label: JSX.Element;
 };
 
-export const countryOptions: CountryOption[] = [
+export const countryOptions: Country[] = [
   {
     value: "IN",
     label: (
@@ -32,7 +31,7 @@ export const countryOptions: CountryOption[] = [
 
 export default function Login() {
   const navigate=useNavigate()
-  const [selectedCountry, setSelectedCountry] = useState<CountryOption | null>(
+  const [selectedCountry, setSelectedCountry] = useState<Country | null>(
     countryOptions[0]
   );
   const login=useMutation({
@@ -53,7 +52,6 @@ export default function Login() {
       toast.error(`Something went wrong`);
     }
   })
-  // Formik configuration
   const formik = useFormik({
     initialValues: {
       mobile: "",
@@ -74,9 +72,9 @@ export default function Login() {
 
   return (
     <div className="w-full flex-1 flex-col flex justify-center items-center gap-10">
-      <div className="relative inline-block text-[31px] font-semibold text-[#2A586F]">
+      <div className="relative inline-block text-[31px] font-semibold text-[var(--text)]">
         <h1 className="relative z-50">Login</h1>
-        <span className="absolute left-0 bottom-1 w-full h-2 bg-[#fac166] z-0"></span>
+        <span className="absolute left-0 bottom-1 w-full h-2 bg-[var(--secondary)] z-0"></span>
       </div>
 
       <form className="p-5 flex flex-col shadow-lg" onSubmit={formik.handleSubmit}>
@@ -85,7 +83,7 @@ export default function Login() {
           <Select
             options={countryOptions}
             value={selectedCountry}
-            onChange={(newValue: SingleValue<CountryOption>) =>
+            onChange={(newValue: SingleValue<Country>) =>
               setSelectedCountry(newValue)
             }
             className="md:w-[110px] w-[75px] text-gray-800 border-2 border-[#c4c4c4] rounded-md mt-2"
@@ -108,28 +106,28 @@ export default function Login() {
           <input
             type="tel"
             placeholder="Enter your phone number"
-            className="p-2 md:pl-10 outline-none text-gray-700 border-2 border-[#c4c4c4] rounded-md mt-2"
+            className="p-2 md:pl-10 outline-none text-gray-700 border-2 border-[var(--border)] rounded-md mt-2"
             {...formik.getFieldProps("mobile")}
           />
         </div>
         {formik.touched.mobile && formik.errors.mobile ? (
-          <div className="text-red-500 text-sm">{formik.errors.mobile}</div>
+          <div className="text-[var(--red)] text-sm">{formik.errors.mobile}</div>
         ) : null}
 
         <label className="text-[18px] font-bold mt-4">Password</label>
         <input
           type="password"
           placeholder="Enter Password"
-          className="flex-1 p-2 outline-none text-gray-700 border-2 border-[#c4c4c4] rounded-md mt-2"
+          className="flex-1 p-2 outline-none text-gray-700 border-2 border-[var(--border)] rounded-md mt-2"
           {...formik.getFieldProps("password")}
         />
         {formik.touched.password && formik.errors.password ? (
-          <div className="text-red-500 text-sm">{formik.errors.password}</div>
+          <div className="text-[var(--red)] text-sm">{formik.errors.password}</div>
         ) : null}
 
         <button
           type="submit"
-          className="mt-8 py-2 font-semibold text-[14px] bg-[#2A586F] text-white border-2 border-[#2A586F] hover:bg-transparent hover:text-[#2A586F] rounded-md"
+          className="mt-8 py-2 font-semibold text-[14px] bg-[var(--primary)] text-white border-2 border-[var(--primary)] hover:bg-transparent hover:text-[var(--primary)]] rounded-md"
         >
           Login
         </button>

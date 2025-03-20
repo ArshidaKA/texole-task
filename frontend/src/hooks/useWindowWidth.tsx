@@ -8,10 +8,8 @@ const useWindowWidth = () => {
       setWindowWidth(window.innerWidth);
     };
 
-    // Add event listener on mount
     window.addEventListener("resize", handleResize);
 
-    // Cleanup the event listener on unmount
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 

@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
-import React, { useState } from "react";
+import { useState } from "react";
 import { GoHome } from "react-icons/go";
-import axiosInstance from "../axios/axiosInstance";
+import axiosInstance from "../api/axiosInstance";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
@@ -12,6 +12,7 @@ export default function Success({}: Props) {
     const [feedback,setFeedback]=useState<string>('')
     const [score]=useState(localStorage.getItem('mark'))||0
     const id=localStorage.getItem('id');
+    
     const navigate=useNavigate();
     const emojis = [
         { rating: 1, emoji: '😢', label: 'Very Dissatisfied' },
@@ -54,11 +55,11 @@ export default function Success({}: Props) {
         </p>
         <p className="font-bold">
           Score &nbsp;:&emsp;
-          <span className="bg-[#fac166] px-4 py-1 font-semibold  rounded-3xl">
+          <span className="bg-[var(--secondary)] px-4 py-1 font-semibold  rounded-3xl">
             {score}/50
           </span>
         </p>
-        <div className="font-bold text-[20px] text-white bg-[#2A586F] mt-2 rounded-md px-4 py-2">
+        <div className="font-bold text-[20px] text-white bg-[var(--primary)] mt-2 rounded-md px-4 py-2">
           Your ID: {id}
         </div>
       </div>
@@ -81,7 +82,7 @@ export default function Success({}: Props) {
           onClick={() => handleEmojiClick(item.emoji)}
           className={`w-12 h-12 rounded-full flex items-center justify-center text-2xl
             ${selectedRating === item.rating 
-              ? 'bg-[#2A586F] ' 
+              ? 'bg-[var(--primary)]' 
               : 'bg-gray-200 hover:bg-gray-300'}`}
           aria-label={item.label}
         >
@@ -92,7 +93,7 @@ export default function Success({}: Props) {
       
       <div className="mb-2 ">
         <textarea
-          className="w-full border-[#c4c4c4] border-1 rounded-md p-4 h-24 focus:outline-none  shadow-md"
+          className="w-full border-[var(--border)] border-1 rounded-md p-4 h-24 focus:outline-none  shadow-md"
           placeholder="Add a comment"
           value={feedback}
           onChange={(e) =>  setFeedback(e.target.value)}
@@ -102,10 +103,10 @@ export default function Success({}: Props) {
       <button
       
         disabled={feedback.length === 0}
-        className={`md:w-1/3 bg-[#2A586F] lg:px-4 border px-1  py-2 rounded-md text-white font-bold text-sm
+        className={`md:w-1/3 bg-[var(--primary)] lg:px-4 border px-1  py-2 rounded-md text-white font-bold text-sm
           ${feedback.length !== 0 
-            ? ' hover:bg-transparent hover:text-[#2A586F] border-[#2A586F] ' 
-            : ' bg-[#2A586F] cursor-not-allowed'}`}
+            ? ' hover:bg-transparent hover:text-[var(--primary)] border-[var(--primary)]] ' 
+            : ' bg-[var(--primary)] cursor-not-allowed'}`}
             onClick={handelSubmit}
       >
         Submit Feedback

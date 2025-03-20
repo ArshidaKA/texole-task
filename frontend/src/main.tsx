@@ -10,16 +10,13 @@ import ErrorPage from './Components/ErrorPage.tsx'
 import Success from './Pages/Success.tsx'
 import Questions from './Pages/Questions.tsx'
 
-// Import TanStack Query (React Query)
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-// Optional: Import the dev tools (typically only in development)
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
-// Create a client
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 5 * 60 * 1000, // 5 minutes
+      staleTime: 5 * 60 * 1000,
       retry: 1,
       refetchOnWindowFocus: false,
     },
@@ -63,7 +60,6 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
       <RouterProvider router={router} />
-      {/* ReactQueryDevtools - remove in production or conditionally render based on environment */}
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   </StrictMode>,

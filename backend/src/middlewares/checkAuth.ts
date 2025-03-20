@@ -13,13 +13,11 @@ declare module "express-serve-static-core" {
 
 const authenticate = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        // Extract token from Authorization header
         const authHeader = req.headers.authorization;
         if (!authHeader) {
             return next(new AppError("Not authenticated", 401));
         }
 
-        // Ensure token is properly formatted
         const token = authHeader.startsWith("Bearer ") ? authHeader.split(" ")[1] : authHeader;
     
         if (!token) {
@@ -33,7 +31,6 @@ const authenticate = async (req: Request, res: Response, next: NextFunction) => 
         }
       
 
-        // Find user
         const user: IUser | null = await User.findById(decoded.id);
         if (!user) {
             return next(new AppError("User not found", 404));

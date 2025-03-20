@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Select, { SingleValue } from "react-select";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import axiosInstance from "../axios/axiosInstance";
+import axiosInstance from "../api/axiosInstance";
 import { useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 
@@ -56,7 +56,7 @@ export default function Register() {
     <div className="w-full flex-1 flex-col flex justify-center items-center">
       <div className="relative inline-block text-[31px] font-bold">
         <h1 className="relative z-50">Register</h1>
-        <span className="absolute left-0 bottom-1 w-full h-2 bg-[#fac166] z-0"></span>
+        <span className="absolute left-0 bottom-1 w-full h-2 bg-[var(--secondary)] z-0"></span>
       </div>
 
       <Formik
@@ -70,11 +70,11 @@ export default function Register() {
           <Form className="p-4 flex flex-col shadow-lg">
             <label className="text-[18px] font-bold mt-3">Full Name</label>
             <Field type="text" name="fullName" className="p-2 outline-none border-2 rounded-md mt-2" placeholder="Enter your name" />
-            <ErrorMessage name="fullName" component="small" className="text-red-500" />
+            <ErrorMessage name="fullName" component="small" className="text-[var(--red)]" />
 
             <label className="text-[18px] font-bold mt-3">Email</label>
             <Field type="text" name="email" className="p-2 outline-none border-2 rounded-md mt-2" placeholder="Enter your email" />
-            <ErrorMessage name="email" component="small" className="text-red-500" />
+            <ErrorMessage name="email" component="small" className="text-[var(--red)]" />
 
             <label className="text-[18px] font-semibold mt-2">Mobile Number</label>
             <div className="flex gap-2 flex-row">
@@ -87,7 +87,7 @@ export default function Register() {
               />
               <Field type="tel" name="mobile" className="p-2 md:pl-10 outline-none border-2 rounded-md mt-2" placeholder="Enter your phone number" />
             </div>
-            <ErrorMessage name="mobile" component="small" className="text-red-500" />
+            <ErrorMessage name="mobile" component="small" className="text-[var(--red)]" />
 
             <label className="text-[18px] font-bold mt-3">Current Status</label>
             <div className="flex gap-4 items-center">
@@ -110,13 +110,13 @@ export default function Register() {
                 <span>Employee</span>
               </label>
             </div>
-            <ErrorMessage name="status" component="small" className="text-red-500" />
+            <ErrorMessage name="status" component="small" className="text-[var(--red)]" />
 
             <label className="text-[18px] font-bold mt-3">Password</label>
             <Field type="password" name="password" className="p-2 outline-none border-2 rounded-md mt-2" placeholder="Enter Password" />
-            <ErrorMessage name="password" component="small" className="text-red-500" />
+            <ErrorMessage name="password" component="small" className="text-[var(--red)]" />
 
-            <button type="submit" className="mt-5 py-2 font-semibold text-[14px] bg-[#2A586F] text-white border-2 rounded-md">
+            <button type="submit" className="mt-5 py-2 font-semibold text-[14px] bg-[var(--primary)] text-white border-2 rounded-md">
               Save
             </button>
             <small className="text-center mt-3">
