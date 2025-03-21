@@ -47,8 +47,9 @@ export default function Register() {
         navigate(`/login`);
       },2000)
     },
-    onError:()=>{
-      toast.error(`Something went wrong`);
+    onError:(error:any)=>{
+      const {message=`Something went wrong`}=error?.response?.data;
+      toast.error(message);
     }
   })
 

@@ -36,10 +36,13 @@ export default function Login() {
   );
   const login=useMutation({
     mutationFn:async(data:IUser)=>{
+      
     const res= await axiosInstance.post(`/auth/login`,data);
+    
       return res.data
     },
     onSuccess:(data)=>{
+      
       localStorage.setItem('token',data.accessToken);
       localStorage.setItem('id',data.user._id);
       toast.success(`Login Successfull`);
@@ -48,8 +51,9 @@ export default function Login() {
         navigate(`/question`);
       },2000)
     },
-    onError:()=>{
-      toast.error(`Something went wrong`);
+    onError:(error:any)=>{
+      const {message=`Something went wrong`}=error?.response?.data;
+      toast.error(message);
     }
   })
   const formik = useFormik({
@@ -84,6 +88,7 @@ export default function Login() {
             options={countryOptions}
             value={selectedCountry}
             onChange={(newValue: SingleValue<Country>) =>
+                  
               setSelectedCountry(newValue)
             }
             className="md:w-[110px] w-[75px] text-gray-800 border-2 border-[#c4c4c4] rounded-md mt-2"
@@ -127,7 +132,7 @@ export default function Login() {
 
         <button
           type="submit"
-          className="mt-8 py-2 font-semibold text-[14px] bg-[var(--primary)] text-white border-2 border-[var(--primary)] hover:bg-transparent hover:text-[var(--primary)]] rounded-md"
+          className="mt-8 py-2 font-semibold text-[14px] bg-[var(--primary)] text-white border-2 border-[var(--primary)] hover:bg-transparent hover:text-[var(--primary)] rounded-md"
         >
           Login
         </button>

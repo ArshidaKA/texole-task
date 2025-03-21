@@ -1,4 +1,4 @@
-import AppError from "../middlewares/AppError";
+import AppError from "../middlewares/customError";
 import Feedback from "../models/feedBack"
 import User from "../models/userSchema";
 

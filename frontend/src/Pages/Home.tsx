@@ -39,10 +39,10 @@ const Home = () => {
           </div>
           <button
             onClick={() => navigate("/login")}
-            className={`px-10 text-[10px]  lg:text-[12px] py-2 border-2 border-[var(--text)] text-[var(--background) font-semibold rounded-md ${
+            className={`px-10 text-[10px]  lg:text-[12px] py-2 border-2 border-[var(--primary)] text-[var(--background)] font-semibold rounded-md ${
               checked
-                ? "bg-[var(--text)] hover:bg-transparent  hover:text-[var(--text)] cursor-pointer"
-                : "bg-[var(--text)] cursor-not-allowed "
+                ? "bg-[var(--primary)] hover:bg-transparent  hover:text-[var(--text)] cursor-pointer"
+                : "bg-[var(--primary)] cursor-not-allowed "
             }`}
             disabled={!checked}
           >

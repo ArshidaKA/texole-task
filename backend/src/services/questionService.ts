@@ -1,4 +1,4 @@
-import AppError from "../middlewares/AppError";
+import AppError from "../middlewares/customError";
 import Question from "../models/questionSchema";
 import { IQuestion } from "../types/question";
 

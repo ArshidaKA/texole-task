@@ -10,7 +10,7 @@ type Props = {};
 export default function Success({}: Props) {
     const [selectedRating] = useState<number | null>(null);
     const [feedback,setFeedback]=useState<string>('')
-    const [score]=useState(localStorage.getItem('mark'))||0
+    const [score]=useState(localStorage.getItem('mark')||0)
     const id=localStorage.getItem('id');
     
     const navigate=useNavigate();
@@ -22,7 +22,7 @@ export default function Success({}: Props) {
         { rating: 5, emoji: '😁', label: 'Very Satisfied' }
       ];
       const handleEmojiClick = (emoji: string) => {
-        setFeedback((prev) => prev + emoji); // Append emoji to existing text
+        setFeedback((prev) => prev + emoji); 
     };
     const addFeedBack=useMutation({
       mutationFn:async(feedback:string)=>{
@@ -31,6 +31,9 @@ export default function Success({}: Props) {
         
       },onSuccess:()=>{
         toast.success(`Feedback Submited Successfully`);
+        setTimeout(()=>{
+          handelHome()
+        },3000)
       },
       onError:()=>{
         toast.error(`something went wrong`);

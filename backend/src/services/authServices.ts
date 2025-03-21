@@ -1,5 +1,5 @@
 import bcrypt from "bcrypt";
-import AppError from "../middlewares/AppError";
+import AppError from "../middlewares/customError";
 import { generateAccessToken } from "../utils/jwt";
 import User from "../models/userSchema";
 import { IUser } from "../types/user";
