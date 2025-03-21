@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { MdOutlineSpaceDashboard } from "react-icons/md";
 import { FaCircle } from "react-icons/fa";
 import { IoMdTime } from "react-icons/io";
-import { FiLogOut } from "react-icons/fi";
 import { BiBookmark } from "react-icons/bi";
 import { IoArrowBack, IoArrowForward } from "react-icons/io5";
 import useWindowWidth from "../hooks/useWindowWidth";
@@ -27,7 +26,6 @@ export default function Questions({}: Props) {
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(
     
   );
-  const [currentQuestion, setCurrentQuestion] = useState(1);
   // const [totalQuestions] = useState(10);
   const [page,setPage]=useState<number >(1);
   const [searchParams, setSearchParams] = useSearchParams();
@@ -64,7 +62,7 @@ const handleSubmit=(e:Event)=>{
     navigate(`/success`)
   }
 
-  const handleNext=(e:Event)=>{
+  const handleNext=()=>{
  
     if(selectedAnswer===questions[page].correctAnswer){
       setMark((prev:any)=>Number(prev)+5);
@@ -236,7 +234,7 @@ if(isError)
               {page===9? <button onClick={(e:any)=>handleSubmit(e)} className="flex items-center gap-1 px-3 py-1 rounded  text-white bg-[#33ac3d]">
                 submit <IoArrowForward className="ml-1" />
               </button>:
-              <button onClick={(e:any)=>handleNext(e)} className="flex items-center gap-1 px-3 py-1 rounded  text-white bg-[#2A586F]">
+              <button onClick={()=>handleNext()} className="flex items-center gap-1 px-3 py-1 rounded  text-white bg-[#2A586F]">
                 Next <IoArrowForward className="ml-1" />
               </button>}
             </div>

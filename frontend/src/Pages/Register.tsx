@@ -66,7 +66,7 @@ export default function Register() {
           register.mutate(values)
         }}
       >
-        {({ setFieldValue, values }) => (
+        {({  values }) => (
           <Form className="p-4 flex flex-col shadow-lg">
             <label className="text-[18px] font-bold mt-3">Full Name</label>
             <Field type="text" name="fullName" className="p-2 outline-none border-2 rounded-md mt-2" placeholder="Enter your name" />
